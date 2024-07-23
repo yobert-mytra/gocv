@@ -28,6 +28,11 @@ void Fisheye_EstimateNewCameraMatrixForUndistortRectify(Mat k, Mat d, Size imgSi
     cv::fisheye::estimateNewCameraMatrixForUndistortRectify(*k, *d, imgSz, *r, *p, balance, newSz, fovScale);
 }
 
+void Fisheye_InitUndistortRectifyMap(Mat cameraMatrix,Mat distCoeffs,Mat r,Mat newCameraMatrix,Size size,int m1type,Mat map1,Mat map2) {
+    cv::Size sz(size.width, size.height);
+    cv::fisheye::initUndistortRectifyMap(*cameraMatrix,*distCoeffs,*r,*newCameraMatrix,sz,m1type,*map1,*map2);
+}
+
 void InitUndistortRectifyMap(Mat cameraMatrix,Mat distCoeffs,Mat r,Mat newCameraMatrix,Size size,int m1type,Mat map1,Mat map2) {
     cv::Size sz(size.width, size.height);
     cv::initUndistortRectifyMap(*cameraMatrix,*distCoeffs,*r,*newCameraMatrix,sz,m1type,*map1,*map2);

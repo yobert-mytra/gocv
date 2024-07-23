@@ -114,6 +114,14 @@ func EstimateNewCameraMatrixForUndistortRectify(k, d Mat, imgSize image.Point, r
 	C.Fisheye_EstimateNewCameraMatrixForUndistortRectify(k.Ptr(), d.Ptr(), imgSz, r.Ptr(), p.Ptr(), C.double(balance), newSz, C.double(fovScale))
 }
 
+func FisheyeInitUndistortRectifyMap(cameraMatrix Mat, distCoeffs Mat, r Mat, newCameraMatrix Mat, size image.Point, m1type int, map1 Mat, map2 Mat) {
+	sz := C.struct_Size{
+		width:  C.int(size.X),
+		height: C.int(size.Y),
+	}
+	C.Fisheye_InitUndistortRectifyMap(cameraMatrix.Ptr(), distCoeffs.Ptr(), r.Ptr(), newCameraMatrix.Ptr(), sz, C.int(m1type), map1.Ptr(), map2.Ptr())
+}
+
 // InitUndistortRectifyMap computes the joint undistortion and rectification transformation and represents the result in the form of maps for remap
 //
 // For further details, please see:
